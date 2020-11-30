@@ -10,15 +10,18 @@ uValutu.addEventListener("change",mojRezultat);
 
 function mojRezultat(){
 	var mydata = JSON.parse(data);
-	
-	var vrednostDinara = 1;
+
+	var vrednostDinaraEvro = mydata[0]["VAŽI ZA"];
+	var vrednostDinaraDolar = mydata[15]["VAŽI ZA"];
+	var vrednostDinaraFrank = mydata[13]["VAŽI ZA"];
+
 	var vrednostEvra = mydata[0]["SREDNJI KURS"];
 	var vrednostDolara = mydata[15]["SREDNJI KURS"];
 	var vrednostFranka = mydata[13]["SREDNJI KURS"];
 	
-	var odnosValutaDinarEvro = vrednostDinara / vrednostEvra;
-	var odnosValutaDinarDolar = vrednostDinara / vrednostDolara;
-	var odnosValutaDinarFrank = vrednostDinara / vrednostFranka;
+	var odnosValutaDinarEvro = vrednostDinaraEvro / vrednostEvra;
+	var odnosValutaDinarDolar = vrednostDinaraDolar / vrednostDolara;
+	var odnosValutaDinarFrank = vrednostDinaraFrank / vrednostFranka;
 	
 	var odnosValutaEvroDolar = vrednostEvra / vrednostDolara;
 	var odnosValutaEvroFrank = vrednostEvra / vrednostFranka;
@@ -79,9 +82,9 @@ function mojRezultat(){
 	}
 
 	var rezultatVrednost = Number(rezultat.value);
-	var rezultatVrednostDecimal = (Math.round(rezultatVrednost * 100) / 100).toFixed(4);
+	var rezultatVrednostDecimal = (rezultatVrednost).toFixed(4);
 	console.log(rezultatVrednostDecimal);
-	document.getElementById("rezultat").value = rezultatVrednostDecimal;
+	rezultat.value = rezultatVrednostDecimal;
 }
 
 
