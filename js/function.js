@@ -8,88 +8,86 @@ iznos.addEventListener("keyup",mojRezultat);
 izValute.addEventListener("change",mojRezultat);
 uValutu.addEventListener("change",mojRezultat);
 
-function mojRezultat(){
-	var mydata = JSON.parse(data);
-
-	var vrednostDinaraEvro = mydata[0]["VAŽI ZA"];
-	var vrednostDinaraDolar = mydata[15]["VAŽI ZA"];
-	var vrednostDinaraFrank = mydata[13]["VAŽI ZA"];
-
-	var vrednostEvra = mydata[0]["SREDNJI KURS"];
-	var vrednostDolara = mydata[15]["SREDNJI KURS"];
-	var vrednostFranka = mydata[13]["SREDNJI KURS"];
-	
-	var odnosValutaDinarEvro = vrednostDinaraEvro / vrednostEvra;
-	var odnosValutaDinarDolar = vrednostDinaraDolar / vrednostDolara;
-	var odnosValutaDinarFrank = vrednostDinaraFrank / vrednostFranka;
-	
-	var odnosValutaEvroDolar = vrednostEvra / vrednostDolara;
-	var odnosValutaEvroFrank = vrednostEvra / vrednostFranka;
-
-	var odnosValutaDolarEvro = vrednostDolara / vrednostEvra;
-	var odnosValutaDolarFrank = vrednostDolara / vrednostFranka;
-
-	var odnosValutaFrankEvro = vrednostFranka / vrednostEvra;
-	var odnosValutaFrankDolar = vrednostFranka / vrednostDolara;
-	
-	var izValuteVrednost = izValute.value;
-	var uValutuVrednost = uValutu.value;
-	
-	const RSD = "dinar";
-	const EUR = "evro";
-	const USD = "dolar";
-	const CHF = "frank";
-
-// porednjenje valuta
-	if(izValuteVrednost === RSD && uValutuVrednost===EUR){
-		rezultat.value = Number(iznos.value) * Number(odnosValutaDinarEvro);
-	}else if(izValuteVrednost === RSD && uValutuVrednost===USD){
-		rezultat.value = Number(iznos.value) * Number(odnosValutaDinarDolar);
-	}else if(izValuteVrednost === RSD && uValutuVrednost===CHF){
-		rezultat.value = Number(iznos.value) * Number(odnosValutaDinarFrank);
-	}else if(izValuteVrednost === RSD && uValutuVrednost===RSD){
-		rezultat.value = iznos.value
-	}
-
-	if(izValuteVrednost === EUR && uValutuVrednost===RSD){
-		rezultat.value = Number(iznos.value) * Number(vrednostEvra);
-	}else if(izValuteVrednost === EUR && uValutuVrednost===USD){
-		rezultat.value = Number(iznos.value) * Number(odnosValutaEvroDolar);
-	}else if(izValuteVrednost === EUR && uValutuVrednost===CHF){
-		rezultat.value = Number(iznos.value) * Number(odnosValutaEvroFrank);
-	}else if(izValuteVrednost === EUR && uValutuVrednost===EUR){
-		rezultat.value = iznos.value
-	}
-
-	if(izValuteVrednost === USD && uValutuVrednost===EUR){
-		rezultat.value = Number(iznos.value) * Number(odnosValutaDolarEvro);
-	}else if(izValuteVrednost === USD && uValutuVrednost===RSD){
-		rezultat.value = Number(iznos.value) * Number(vrednostDolara);
-	}else if(izValuteVrednost === USD && uValutuVrednost===CHF){
-		rezultat.value = Number(iznos.value) * Number(odnosValutaDolarFrank);
-	}else if(izValuteVrednost === USD && uValutuVrednost===USD){
-		rezultat.value = iznos.value
-	}
-
-	if(izValuteVrednost === CHF && uValutuVrednost===EUR){
-		rezultat.value = Number(iznos.value) * Number(odnosValutaFrankEvro);
-	}else if(izValuteVrednost === CHF && uValutuVrednost===RSD){
-		rezultat.value = Number(iznos.value) * Number(vrednostFranka);
-	}else if(izValuteVrednost === CHF && uValutuVrednost===USD){
-		rezultat.value = Number(iznos.value) * Number(odnosValutaFrankEvro);
-	}else if(izValuteVrednost === CHF && uValutuVrednost===CHF){
-		rezultat.value = iznos.value
-	}
-
-	var rezultatVrednost = Number(rezultat.value);
-	var rezultatVrednostDecimal = (rezultatVrednost).toFixed(4);
-	console.log(rezultatVrednostDecimal);
-	rezultat.value = rezultatVrednostDecimal;
+class Valuta {
+    constructor(oznakaValute, sifraValute, nazivZemlje, vaziZa, srednjiKurs) {
+        this.oznakaValute = oznakaValute;
+        this.sifraValute = sifraValute;
+        this.nazivZemlje = nazivZemlje;
+        this.vaziZa = vaziZa;
+        this.srednjiKurs = srednjiKurs;
+    }
 }
 
+let mydata = JSON.parse(data);
+let valute = mydata.map(valuta => new Valuta(valuta["oznakaValute"], valuta["sifraValute"], valuta["nazivZemlje"], valuta["vaziZa"], valuta["srednjiKurs"]));
 
-$(document).ready(function () {
-	var mydata = JSON.parse(data);
-	console.log(mydata);
-	console.log(mydata[0]);
+let listaSrednjihKurseva = []; //Empty arrey populate
+console.log(listaSrednjihKurseva);
+
+mydata.forEach(function(data) {
+    let sKurs = new Valuta(data["oznakaValute"], data["sifraValute"], data["nazivZemlje"], data["vaziZa"], data["srednjiKurs"]);
+    listaSrednjihKurseva.push(sKurs);
 });
+
+const RSD = "dinar";
+const EUR = "evro";
+const USD = "dolar";
+const CHF = "frank";
+
+let vrednostEvra = valute.find(v => v.sifraValute === 978);
+let vrednostDolara = valute.find(v => v.sifraValute === 840);
+let vrednostFranka = valute.find(v => v.sifraValute === 756);
+
+function mojDinar(){
+	if (izValute.value == RSD && uValutu.value == EUR){
+		rezultat.value = (Number(iznos.value) / Number(vrednostEvra.srednjiKurs)).toFixed(4)
+   }if (izValute.value === RSD && uValutu.value === USD){
+		rezultat.value = (Number(iznos.value) / Number(vrednostDolara.srednjiKurs)).toFixed(4)
+   }if (izValute.value === RSD && uValutu.value === CHF){
+		rezultat.value = (Number(iznos.value) / Number(vrednostFranka.srednjiKurs)).toFixed(4)
+   }if (izValute.value === RSD && uValutu.value === RSD){
+		rezultat.value = Number(iznos.value).toFixed(4)
+    }
+}
+function mojEvro(){
+	if(izValute.value === EUR && uValutu.value === RSD){
+		rezultat.value = (Number(iznos.value) * Number(vrednostEvra.srednjiKurs)).toFixed(4)
+    }if(izValute.value === EUR && uValutu.value === USD){
+	   rezultat.value = (Number(iznos.value) * Number(vrednostEvra.srednjiKurs / vrednostDolara.srednjiKurs)).toFixed(4)
+    }if(izValute.value === EUR && uValutu.value === CHF){
+	  rezultat.value = (Number(iznos.value) * Number(vrednostEvra.srednjiKurs / vrednostFranka.srednjiKurs)).toFixed(4)
+    } if(izValute.value === EUR && uValutu.value === EUR){
+		rezultat.value = Number(iznos.value).toFixed(4)
+    }
+}
+
+function mojDolar(){
+	if(izValute.value === USD && uValutu.value === EUR){
+		rezultat.value = (Number(iznos.value) * Number(vrednostDolara.srednjiKurs / vrednostEvra.srednjiKurs)).toFixed(4)
+    }if(izValute.value === USD && uValutu.value === RSD){
+		rezultat.value = (Number(iznos.value) * Number(vrednostDolara.srednjiKurs)).toFixed(4)
+    } if(izValute.value === USD && uValutu.value === CHF){
+		rezultat.value = (Number(iznos.value) * Number(vrednostDolara.srednjiKurs / vrednostFranka.srednjiKurs)).toFixed(4)
+    } if(izValute.value === USD && uValutu.value === USD){
+	   rezultat.value = Number(iznos.value).toFixed(4)
+  }
+}
+
+function mojFranak(){
+	if(izValute.value === CHF && uValutu.value === EUR){
+		rezultat.value = (Number(iznos.value) * Number(vrednostFranka.srednjiKurs / vrednostEvra.srednjiKurs)).toFixed(4)
+    }if(izValute.value === CHF && uValutu.value === RSD){
+		rezultat.value = (Number(iznos.value) * Number(vrednostFranka.srednjiKurs)).toFixed(4)
+    }if(izValute.value === CHF && uValutu.value === USD){
+		rezultat.value = (Number(iznos.value) * Number(vrednostFranka.srednjiKurs / vrednostDolara.srednjiKurs)).toFixed(4)
+    }if(izValute.value === CHF && uValutu.value === CHF){
+		rezultat.value = Number(iznos.value).toFixed(4)
+   }
+}
+function mojRezultat(){
+	mojDinar()
+	mojEvro()
+	mojDolar()
+	mojFranak()
+	var rezultatVrednot = (rezultat.value);
+}
