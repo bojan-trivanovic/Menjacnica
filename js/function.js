@@ -3,10 +3,10 @@ var iznos = document.getElementById('iznos');
 var rezultat = document.getElementById('rezultat');
 var izValute = document.getElementById('iz-valute');
 var uValutu = document.getElementById('u-valutu');
+var izracunaj = document.getElementById('izracunaj');
+var prikazRezultata = document.getElementById('prikazRezultata');
 
-iznos.addEventListener("keyup",mojRezultat);
-izValute.addEventListener("change",mojRezultat);
-uValutu.addEventListener("change",mojRezultat);
+izracunaj.addEventListener("click",mojRezultat);
 
 class Valuta {
     constructor(oznakaValute, sifraValute, nazivZemlje, vaziZa, srednjiKurs) {
@@ -89,5 +89,5 @@ function mojRezultat(){
 	mojEvro()
 	mojDolar()
 	mojFranak()
-	var rezultatVrednot = (rezultat.value);
+	prikazRezultata.innerHTML = rezultat.value;
 }

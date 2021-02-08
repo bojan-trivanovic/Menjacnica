@@ -11,10 +11,38 @@
 		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
-		input,select {
+		input,select, label, button {
 			margin-bottom: 20px;
 			font-size: 24px;
 			color: rgb(118, 118, 118);
+		}
+		button {
+			cursor: pointer;
+		}
+		label {
+			height: 30px;
+			border-width: .2px;
+		    border-style: inset;
+		    border-color: #767676;
+		    border-radius: .5px;
+		    padding: 1px 4px;
+		    font-family: Arial;
+		    -webkit-writing-mode: horizontal-tb !important;
+    		text-rendering: auto;
+    		color: -internal-light-dark(black, white);
+    		letter-spacing: normal;
+    		word-spacing: normal;
+    		text-transform: none;
+    		text-indent: 0px;
+    		text-shadow: none;
+    		display: inline-block;
+    		text-align: start;
+    		appearance: textfield;
+    		-webkit-rtl-ordering: logical;
+    		cursor: text;
+		}
+		#rezultat {
+			display: none;
 		}
 	}
 }
