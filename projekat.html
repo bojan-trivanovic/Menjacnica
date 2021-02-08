@@ -1,56 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Konverter Valuta</title>
-    <link href="style.css" rel="stylesheet">
-</head>
+    <link href="style.css" rel="stylesheet" />
+  </head>
 
-<body>
-	<div class="konvertor-valuta">
-		<div class="konvertor-valuta-unutra">
-			<h1 class="converter-title">Konvertor valuta</h1>
-			<input type="text" placeholder="Iznos" id="iznos">
-			<div class="text">iz valute</div>
-			<select  id="iz-valute">
-				<option value="dinar">RSD-Srpski dinar</option>
-				<option value="evro">EUR-evro</option>
-				<option value="dolar">USD-Americski dolar</option>
-				<option value="frank">CHF-Svajcarski franak</option>
-			</select>
-			<div class="text">u valute</div>
-			<select  id="u-valutu">
-				<option value="dinar">RSD-Srpski dinar</option>
-				<option value="evro">EUR-evro</option>
-				<option value="dolar">USD-Americski dolar</option>
-				<option value="frank">CHF-Svajcarski franak</option>
-			</select>
-			<label id=prikazRezultata>Rezultat</label>
-			<input readonly type="text" placeholder="Rezutat" id="rezultat" data-decimals="4">
-			<button id="izracunaj">Izracunaj</button>
-		</div>
-	</div>
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-	<script type="text/javascript" src="kursna_lista.json"></script>
-	<script src="./js/function.js"></script>
-</body>
+  <body>
+    <div class="konvertor-valuta">
+      <div class="konvertor-valuta-unutra">
+        <h1 class="converter-title">Konvertor valuta</h1>
+        <input type="text" placeholder="Iznos" id="iznos" />
+        <div class="text">iz valute</div>
+        <select id="iz-valute">
+          <option value="dinar">RSD-Srpski dinar</option>
+          <option value="EUR">EUR-evro</option>
+          <option value="dolar">USD-Americski dolar</option>
+          <option value="frank">CHF-Svajcarski franak</option>
+        </select>
+        <div class="text">u valute</div>
+        <select id="u-valutu">
+          <option value="dinar">RSD-Srpski dinar</option>
+          <option value="EUR">EUR-evro</option>
+          <option value="dolar">USD-Americski dolar</option>
+          <option value="frank">CHF-Svajcarski franak</option>
+        </select>
+        <label id="prikazRezultata">Rezultat</label>
+        <button id="izracunaj" onclick="izracunaj()">Izracunaj</button>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script
+      type="text/javascript"
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
+    ></script>
+    <script type="text/javascript" src="kursna_lista.json"></script>
+    <script src="./js/function.js"></script>
+  </body>
 </html>
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
