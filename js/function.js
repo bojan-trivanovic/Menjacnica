@@ -1,8 +1,4 @@
-
-var iznos = document.getElementById('iznos').value;
-var izValute = document.getElementById('iz-valute').value;
-var uValutu = document.getElementById('u-valutu').value;
-var prikazRezultata = document.getElementById('prikazRezultata').value;
+var prikazRezultata = document.getElementById('prikazRezultata');
 
 class Valuta {
   constructor(oznakaValute, sifraValute, nazivZemlje, vaziZa, srednjiKurs) {
@@ -24,20 +20,12 @@ function konvertuj(){
 
   let vrednostIzValute = valute.find(v => v.oznakaValute === izValute);
   let vrednostUValutu = valute.find(v => v.oznakaValute === uValutu);
-  let odnosValuta = vrednostUValutu / vrednostIzValute;
+  let odnosValuta = vrednostUValutu.srednjiKurs / vrednostIzValute.srednjiKurs;
   let rezultat = odnosValuta * iznos;
   return rezultat;
 }
-console.log(iznos);
-console.log(izValute);
-console.log(uValutu);
-console.log(vrednostIzValute);
-console.log(vrednostUValutu);
-console.log(odnosValuta);
-console.log(rezultat);
-function izracunaj() {
- 
 
+function izracunaj() {
   var rezultat = konvertuj();
 
   prikazRezultata.innerHTML = rezultat;
