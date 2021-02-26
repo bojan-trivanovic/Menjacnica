@@ -28,6 +28,13 @@ function konvertuj(){
   let rezultat = odnosValuta * iznos;
   return rezultat;
 }
+console.log(iznos);
+console.log(izValute);
+console.log(uValutu);
+console.log(vrednostIzValute);
+console.log(vrednostUValutu);
+console.log(odnosValuta);
+console.log(rezultat);
 function izracunaj() {
  
 
@@ -35,4 +42,6 @@ function izracunaj() {
 
   prikazRezultata.innerHTML = rezultat;
 }
+
+
 
