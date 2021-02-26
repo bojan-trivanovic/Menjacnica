@@ -30,6 +30,3 @@ function izracunaj() {
 
   prikazRezultata.innerHTML = rezultat;
 }
-
-
-
